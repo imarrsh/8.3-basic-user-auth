@@ -6,7 +6,9 @@ var Backbone = require('backbone');
 
 var UserModel = Backbone.Model.extend({
   idAttribute: 'objectId',
-  urlRoot: 'http://mt-parse-server.herokuapp.com/users',
+  urlRoot: function(){
+    return 'http://mt-parse-server.herokuapp.com/users';
+  },
   signup: function(userCreds){
     this.save(userCreds).then(function(response){
       console.log(response);

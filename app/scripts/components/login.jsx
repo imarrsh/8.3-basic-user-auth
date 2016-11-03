@@ -90,7 +90,7 @@ var LoginForm = React.createClass({
           <h1>Returning? Login Here</h1>
         </div>
         <div className="form-panel">
-          <form>
+          <form onSubmit={this.handleSubmit}>
             <div className="form-group">
               <label htmlFor="exampleInputEmail1">Email address</label>
               <input onChange={this.userChange} type="email" className="form-control" id="exampleInputEmail1" placeholder="Email" />
