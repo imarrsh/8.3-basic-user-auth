@@ -123,7 +123,8 @@ var LoginContainer = React.createClass({
   signUpUser: function(userCreds){
     // console.log(userCreds);
     var user = this.state.user;
-    user.signup(userCreds);
+    user.set(userCreds);
+    user.signup();
     console.log(user)
   },
   logInUser: function(userCreds){
