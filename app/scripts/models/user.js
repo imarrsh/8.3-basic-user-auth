@@ -6,23 +6,25 @@ var Backbone = require('backbone');
 
 var UserModel = Backbone.Model.extend({
   idAttribute: 'objectId',
-  urlRoot: function(){
-    // console.log('connecting to...', endpoint)
-    return 'http://mt-parse-server.herokuapp.com/';
-  },
+
   signup: function(userCreds){
-    // this.urlRoot('users');
+    this.urlRoot = 'http://mt-parse-server.herokuapp.com/users';
     this.save(userCreds).then(function(response){
       console.log(response);
 
       localStorage.setItem('sessionID', JSON.stringify(response.sessionToken));
     });
   },
+
   login: function(userCreds){
-    this.fetch(userCreds).then(function(response){
-      console.log(response);
+    this.urlRoot = 'http://mt-parse-server.herokuapp.com/login?username=' +
+      encodeURI(userCreds.username) + '&password=' + encodeURI(userCreds.password);
+
+    this.fetch().then(function(response){
+      localStorage.setItem('sessionID', JSON.stringify(response.sessionToken));
     });
   },
+
   logout: function(){
     // do logout stuff
   }

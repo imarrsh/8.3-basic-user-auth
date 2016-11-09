@@ -40,14 +40,14 @@ var SignUpForm = React.createClass({
           <form onSubmit={this.handleSubmit}>
             <div className="form-group">
               <label htmlFor="signup-email">Email address</label>
-              <input id="signup-email" type="email" 
+              <input id="signup-email" name="username" type="email" 
                 className="form-control" placeholder="Email" 
                 onChange={this.userChange} value={this.state.username} 
               />
             </div>
             <div className="form-group">
               <label htmlFor="signup-pwd">Password</label>
-              <input id="signup-pwd" type="password" 
+              <input id="signup-pwd" name="password" type="password" 
                 placeholder="Password" className="form-control" 
                 onChange={this.pwChange} value={this.state.pw}
               />
@@ -93,11 +93,14 @@ var LoginForm = React.createClass({
           <form onSubmit={this.handleSubmit}>
             <div className="form-group">
               <label htmlFor="exampleInputEmail1">Email address</label>
-              <input onChange={this.userChange} type="email" className="form-control" id="exampleInputEmail1" placeholder="Email" />
+              <input onChange={this.userChange} value={this.state.username} name="username" type="email" 
+                className="form-control" id="exampleInputEmail1" placeholder="Email" />
             </div>
             <div className="form-group">
               <label htmlFor="exampleInputPassword1">Password</label>
-              <input onChange={this.userChange} type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
+              <input onChange={this.pwChange} value={this.state.pw} name="password" 
+                type="password" className="form-control" 
+                id="exampleInputPassword1" placeholder="Password" />
             </div>
             <div className="checkbox">
               <label>
