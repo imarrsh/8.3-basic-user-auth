@@ -1,14 +1,16 @@
 // models/user
 var $ = require('jquery');
-
-
 var Backbone = require('backbone');
 
-var UserModel = Backbone.Model.extend({
+var ParseUser = Backbone.Model.extend({
   idAttribute: 'objectId',
+  urlRoot: 'http://mt-parse-server.herokuapp.com/'
+});
 
+
+var UserModel = ParseUser.extend({
   signup: function(userCreds){
-    this.urlRoot = 'http://mt-parse-server.herokuapp.com/users';
+    this.urlRoot = this.urlRoot + 'users';
     this.save(userCreds).then(function(response){
       console.log(response);
 
@@ -17,11 +19,22 @@ var UserModel = Backbone.Model.extend({
   },
 
   login: function(userCreds){
-    this.urlRoot = 'http://mt-parse-server.herokuapp.com/login?username=' +
-      encodeURI(userCreds.username) + '&password=' + encodeURI(userCreds.password);
+    this.urlRoot = this.urlRoot +
+      'login?username=' + encodeURI(userCreds.username) +
+      '&password=' + encodeURI(userCreds.password);
 
     this.fetch().then(function(response){
-      localStorage.setItem('sessionID', JSON.stringify(response.sessionToken));
+      var userData = [];
+      var user = {
+        username: response.username,
+        objectId: response.objectId,
+        sessionToken: response.sessionToken
+      };
+      userData.push(user);
+
+      // var sessionToken = JSON.stringify(response.sessionToken);
+      // var username = JSON.stringify(response.username);
+      localStorage.setItem('user', JSON.stringify(userData));
     });
   },
 
