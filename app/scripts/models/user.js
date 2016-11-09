@@ -4,7 +4,7 @@ var Backbone = require('backbone');
 
 var ParseUser = Backbone.Model.extend({
   idAttribute: 'objectId',
-  urlRoot: 'http://mt-parse-server.herokuapp.com/'
+  urlRoot: 'https://mt-parse-server.herokuapp.com/'
 });
 
 

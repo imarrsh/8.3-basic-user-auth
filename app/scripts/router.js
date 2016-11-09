@@ -14,12 +14,12 @@ var AppRouter = Backbone.Router.extend({
   },
   initialize: function(){
     // set up the headers
-    $.ajaxSetup({
-      beforeSend: function(xhr){
-        xhr.setRequestHeader("X-Parse-Application-Id", "mtparseserver");
-        xhr.setRequestHeader("X-Parse-REST-API-Key", "thompson1");
-      }
-    });
+    // $.ajaxSetup({
+    //   beforeSend: function(xhr){
+    //     xhr.setRequestHeader("X-Parse-Application-Id", "mtparseserver");
+    //     xhr.setRequestHeader("X-Parse-REST-API-Key", "thompson1");
+    //   }
+    // });
   },
   index: function(){
     // login screen
@@ -31,7 +31,7 @@ var AppRouter = Backbone.Router.extend({
   messages: function(){
     // messages view
     ReactDOM.render(
-      React.createElement(MessagesContainer),
+      React.createElement(MessagesContainer, {router: this}),
       document.getElementById('app')
     );
   }
