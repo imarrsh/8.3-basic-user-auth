@@ -4,10 +4,10 @@ var Backbone = require('backbone');
 
 var Message = Backbone.Model.extend({
   idAttribute: 'objectId',
-  urlRoot: 'https://mt-parse-server.herokuapp.com/classes/Message',
-  postMessage: function(message){
-
-  }
+  defaults: {
+    content: ''
+  },
+  urlRoot: 'https://mt-parse-server.herokuapp.com/classes/Message'
 });
 
 var MessageCollection = Backbone.Collection.extend({

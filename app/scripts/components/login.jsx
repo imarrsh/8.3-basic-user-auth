@@ -1,6 +1,9 @@
 var $ = require('jquery');
 var React = require('react');
 
+// utilites
+var xParseHeaders = require('../utilities').xParseHeaders;
+
 // data
 var UserModel = require('../models/user').UserModel;
 
@@ -131,8 +134,15 @@ var LoginContainer = React.createClass({
     console.log(user)
   },
   logInUser: function(userCreds){
-    var user = this.state.user;
-    user.login(userCreds)
+    var self = this
+    , user = this.state.user;
+    
+    // set up headers
+    xParseHeaders();
+    
+    user.login(userCreds, function(){
+      self.props.router.navigate('#messages/', {trigger: true});
+    });
   },
   render: function(){
     return(

@@ -18,12 +18,13 @@ var UserModel = ParseUser.extend({
     });
   },
 
-  login: function(userCreds){
+  login: function(userCreds, callback){
+    var urlRoot = this.urlRoot;
     this.urlRoot = this.urlRoot +
       'login?username=' + encodeURI(userCreds.username) +
       '&password=' + encodeURI(userCreds.password);
 
-    this.fetch().then(function(response){
+    this.fetch().then(response => {
       var userData = [];
       var user = {
         username: response.username,
@@ -32,10 +33,18 @@ var UserModel = ParseUser.extend({
       };
       userData.push(user);
 
-      // var sessionToken = JSON.stringify(response.sessionToken);
-      // var username = JSON.stringify(response.username);
       localStorage.setItem('user', JSON.stringify(userData));
+      //  some callback funtion, perhaps a router.navigate
+      callback();
+    }).fail(response => {
+      // probably a better way...
+      this.urlRoot = 'https://mt-parse-server.herokuapp.com/'
     });
+
+  },
+
+  postMessage: function(message){
+    console.log('got your message:', message);
   },
 
   logout: function(){

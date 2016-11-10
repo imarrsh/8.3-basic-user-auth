@@ -24,14 +24,14 @@ var AppRouter = Backbone.Router.extend({
   index: function(){
     // login screen
     ReactDOM.render(
-      React.createElement(LoginContainer),
+      React.createElement(LoginContainer, { router: this }),
       document.getElementById('app')
     );
   },
   messages: function(){
     // messages view
     ReactDOM.render(
-      React.createElement(MessagesContainer, {router: this}),
+      React.createElement(MessagesContainer, { router: this }),
       document.getElementById('app')
     );
   }
